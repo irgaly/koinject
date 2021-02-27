@@ -21,6 +21,6 @@ dependencies {
     implementation(Dependencies.AndroidX.material)
     implementation(Dependencies.Kotlin.KotlinX.Serialization.json)
     implementation(project(":koinject"))
-    ksp(project(":koinject"))
+    ksp(project(":koinject-ksp"))
     testImplementation(project(":test:android"))
 }

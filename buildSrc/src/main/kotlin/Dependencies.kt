@@ -40,8 +40,10 @@ object Dependencies {
         }
 
         object Stately {
-            val version = "1.1.1"
+            val version = "1.1.4"
             val common = "co.touchlab:stately-common:$version"
+            val concurrency = "co.touchlab:stately-concurrency:$version"
+            val isolateCollections = "co.touchlab:stately-iso-collections:1.1.4-a1"
         }
     }
 
