@@ -1,14 +1,15 @@
 package net.irgaly.koinject.instance
 
 import net.irgaly.koinject.definition.InstanceDefinition
+import net.irgaly.koinject.scope.Scope
 
 abstract class InstanceFactory<T: Any>(
     val definition: InstanceDefinition<T>
 ) {
-    abstract fun get(): T
+    abstract fun get(scope: Scope): T
 
-    protected fun create(): T {
-        return definition.create()
+    protected fun create(scope: Scope): T {
+        return definition.create(scope)
     }
 
     companion object {

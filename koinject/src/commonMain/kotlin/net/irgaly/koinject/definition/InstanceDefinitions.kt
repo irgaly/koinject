@@ -24,7 +24,7 @@ class InstanceDefinitions(val globalDefinitions: Definitions) {
         definitions[R::class] = InstanceDefinition(false, R::class, definition = definition)
     }
 
-    inline fun <reified T : Any> single(noinline definition: () -> T) {
+    inline fun <reified T : Any> single(noinline definition: Definition<T>) {
         definitions[T::class] = InstanceDefinition(true, T::class, definition = definition)
     }
 

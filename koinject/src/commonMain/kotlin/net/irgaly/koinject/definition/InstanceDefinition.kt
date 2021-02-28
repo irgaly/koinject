@@ -3,6 +3,7 @@ package net.irgaly.koinject.definition
 import net.irgaly.koinject.instance.InstanceKey
 import net.irgaly.koinject.platform.fullName
 import net.irgaly.koinject.qualifier.Qualifier
+import net.irgaly.koinject.scope.Scope
 import kotlin.reflect.KClass
 
 /**
@@ -26,7 +27,7 @@ data class InstanceDefinition<T: Any>(
         return instanceKey(type, qualifier)
     }
 
-    fun create(): T {
-        return definition()
+    fun create(scope: Scope): T {
+        return definition(scope)
     }
 }

@@ -44,8 +44,8 @@ class InstanceRegistry(koinject: Koinject) {
         }
     }
 
-    fun <T> resolveInstance(currentScope: Scope, key: InstanceKey): T? {
+    fun <T> resolveInstance(scope: Scope, key: InstanceKey): T? {
         @Suppress("UNCHECKED_CAST")
-        return instances[key]?.first()?.get() as? T
+        return instances[key]?.first()?.get(scope) as? T
     }
 }
