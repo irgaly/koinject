@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 class Scope(private val koinject: Koinject) {
     private val logger get() = koinject.logger
     val instances: InstanceRegistry = InstanceRegistry(koinject)
-    val parent: Scope? = null
+    var parent: Scope? = null
     val modules: MutableSet<Module> = mutableSetOf()
 
     fun loadModule(module: Module) {
