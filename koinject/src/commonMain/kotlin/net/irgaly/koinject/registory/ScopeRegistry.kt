@@ -22,6 +22,12 @@ internal class ScopeRegistry(private val koinject: Koinject) {
     private val scopeDefinitions: MutableMap<ScopeId, ScopeDefinition> = IsoMutableMap()
     private val scopes: MutableMap<ScopeId, MutableMap<ScopeKey, Scope>> = IsoMutableMap()
 
+    init {
+        scopes[rootScope.scopeKey.scopeId] = IsoMutableMap {
+            mutableMapOf(rootScope.scopeKey to rootScope)
+        }
+    }
+
     fun loadModule(module: Module) {
         lock.withLock {
             val scopeId = module.scopeId

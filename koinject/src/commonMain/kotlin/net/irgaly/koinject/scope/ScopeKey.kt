@@ -10,4 +10,9 @@ data class ScopeKey(
     companion object {
         val rootKey = ScopeKey(ScopeId.root)
     }
+
+    override fun toString(): String {
+        return if (owner != null)  "${scopeId.value}::$owner"
+        else scopeId.value
+    }
 }

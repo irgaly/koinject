@@ -92,4 +92,8 @@ class Scope internal constructor(
             loadModule(it)
         }
     }
+
+    override fun toString(): String {
+        return scopeKey.toString()
+    }
 }

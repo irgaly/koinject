@@ -10,17 +10,11 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(Dependencies.Kotlin.test)
-                api(Dependencies.Kotlin.reflect)
-                api(Dependencies.Kotlin.Coroutines.test)
-                api(Dependencies.Test.Spek.dslCommon)
+                api(project(":test"))
             }
         }
         val androidMain by getting {
             dependencies {
-                api(Dependencies.Test.Spek.dslJvm)
-                api(Dependencies.Test.Spek.runnerJunit5)
-                api(Dependencies.Test.Mockk.mockk)
             }
         }
     }

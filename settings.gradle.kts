@@ -9,5 +9,6 @@ include(
     ":koinject",
     ":koinject-ksp",
     ":sample:android",
-    ":test:android"
+    ":test:android",
+    ":test"
 )

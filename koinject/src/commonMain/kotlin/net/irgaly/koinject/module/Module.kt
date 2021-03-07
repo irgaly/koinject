@@ -8,6 +8,8 @@ abstract class Module(
     val scopeId: ScopeId? = null,
     protected val builder: InstanceDefinitions.() -> Unit
 ) {
+    constructor(builder: InstanceDefinitions.() -> Unit): this(null, builder)
+
     fun buildDefinitions(koinject: Koinject): InstanceDefinitions {
         return InstanceDefinitions(koinject.globalDefinitions).apply {
             builder()

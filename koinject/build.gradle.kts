@@ -13,6 +13,11 @@ kotlin {
                 implementation(Dependencies.Kotlin.Stately.isolateCollections)
             }
         }
+        commonTest {
+            dependencies {
+                api(project(":test"))
+            }
+        }
         val jvmMain by getting {
             dependencies {
             }

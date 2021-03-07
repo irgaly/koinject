@@ -28,7 +28,7 @@ class Koinject {
         return scopeRegistry.createScope(ScopeKey(scopeId), parentScope)
     }
 
-    fun createScope(scopeId: ScopeId, owner: Any, parentScope: Scope? = null): Scope {
+    fun createInstanceScope(scopeId: ScopeId, owner: Any, parentScope: Scope? = null): Scope {
         return scopeRegistry.createScope(ScopeKey(scopeId, owner), parentScope)
     }
 
