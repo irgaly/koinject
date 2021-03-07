@@ -9,15 +9,23 @@ import net.irgaly.koinject.qualifier.Qualifier
 import net.irgaly.koinject.registory.InstanceRegistry
 import kotlin.reflect.KClass
 
-class Scope(private val koinject: Koinject) {
+class Scope internal constructor(
+    private val koinject: Koinject,
+    val scopeKey: ScopeKey,
+    private var _parent: Scope? = null
+) {
     private val logger get() = koinject.logger
-    val instances: InstanceRegistry = InstanceRegistry(koinject)
-    var parent: Scope? = null
-    val modules: MutableSet<Module> = mutableSetOf()
+    private val _children: MutableList<Scope> = mutableListOf()
+    private val _modules: MutableSet<Module> = mutableSetOf()
+    private val instances: InstanceRegistry = InstanceRegistry(koinject)
+
+    val parent: Scope? get() = _parent
+    val children: List<Scope> = _children
+    val modules: Set<Module> = _modules
 
     fun loadModule(module: Module) {
-        if (!modules.contains(module)) {
-            modules.add(module)
+        if (!_modules.contains(module)) {
+            _modules.add(module)
             module.buildDefinitions(koinject).definitions.forEach {
                 instances.addDefinition(it.value)
             }
@@ -27,8 +35,8 @@ class Scope(private val koinject: Koinject) {
     }
 
     fun unloadModule(module: Module) {
-        if (modules.contains(module)) {
-            modules.remove(module)
+        if (_modules.contains(module)) {
+            _modules.remove(module)
             module.buildDefinitions(koinject).definitions.forEach {
                 instances.removeDefinition(it.value)
             }
@@ -38,11 +46,19 @@ class Scope(private val koinject: Koinject) {
     }
 
     inline fun <reified T: Any> register(instance: T, qualifier: Qualifier? = null) {
-        instances.addDefinition(InstanceDefinition(true, T::class, qualifier) { instance })
+        register(T::class, instance, qualifier)
+    }
+
+    fun <T: Any> register(type: KClass<T>, instance: T, qualifier: Qualifier? = null) {
+        instances.addDefinition(InstanceDefinition(true, type, qualifier) { instance })
     }
 
     inline fun <reified T: Any> unregister(instance: T, qualifier: Qualifier? = null) {
-        instances.removeDefinition(InstanceDefinition(true, T::class, qualifier) { instance })
+        unregister(T::class, instance, qualifier)
+    }
+
+    fun <T: Any> unregister(type: KClass<T>, instance: T, qualifier: Qualifier? = null) {
+        instances.removeDefinition(InstanceDefinition(true, type, qualifier) { instance })
     }
 
     inline fun <reified T: Any> get(qualifier: Qualifier? = null): T {
@@ -53,10 +69,27 @@ class Scope(private val koinject: Koinject) {
         return resolveInstance(this, InstanceDefinition.instanceKey(type, qualifier))
     }
 
+    fun close() {
+        koinject.closeScope(this)
+    }
+
+    fun addChild(child: Scope) {
+        _children.add(child)
+    }
+
+    fun removeChild(child: Scope) {
+        _children.remove(child)
+    }
+
     internal fun <T: Any> resolveInstance(currentScope: Scope, key: InstanceKey): T {
         return instances.resolveInstance(currentScope, key)
-            ?: parent?.resolveInstance(currentScope, key)
+            ?: _parent?.resolveInstance(currentScope, key)
             ?: throw NoDefinitionException(key)
+    }
 
+    internal fun applyDefinition(definition: ScopeDefinition) {
+        definition.modules.forEach {
+            loadModule(it)
+        }
     }
 }

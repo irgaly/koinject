@@ -10,7 +10,11 @@ import net.irgaly.koinject.instance.InstanceFactory
 import net.irgaly.koinject.instance.InstanceKey
 import net.irgaly.koinject.scope.Scope
 
-class InstanceRegistry(koinject: Koinject) {
+/**
+ * Scope の Instance コンテナ
+ * スレッドセーフ
+ */
+internal class InstanceRegistry(koinject: Koinject) {
     private val lock = Lock()
     private val logger = koinject.logger
     private val instances: MutableMap<InstanceKey, MutableList<InstanceFactory<*>>> = IsoMutableMap()
