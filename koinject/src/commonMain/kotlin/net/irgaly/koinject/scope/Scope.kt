@@ -66,7 +66,7 @@ class Scope internal constructor(
     }
 
     fun <T: Any> get(type: KClass<T>, qualifier: Qualifier? = null): T {
-        return resolveInstance(this, InstanceDefinition.instanceKey(type, qualifier))
+        return resolveInstance(this, InstanceKey.from(type, qualifier))
     }
 
     fun close() {
@@ -84,7 +84,7 @@ class Scope internal constructor(
     internal fun <T: Any> resolveInstance(currentScope: Scope, key: InstanceKey): T {
         return instances.resolveInstance(currentScope, key)
             ?: _parent?.resolveInstance(currentScope, key)
-            ?: throw NoDefinitionException(key)
+            ?: throw NoDefinitionException(key.value)
     }
 
     internal fun applyDefinition(definition: ScopeDefinition) {
