@@ -11,6 +11,7 @@ buildscript {
         classpath(Dependencies.Android.classpath)
         classpath(Dependencies.Kotlin.classpath)
         classpath(Dependencies.Kotlin.KotlinX.Serialization.classpath)
+        classpath(Dependencies.AndroidX.Navigation.classpath)
         classpath(Dependencies.Ksp.classpath)
         classpath(Dependencies.Remal.classpath)
     }

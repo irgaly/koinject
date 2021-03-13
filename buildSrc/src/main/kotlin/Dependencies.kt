@@ -13,7 +13,7 @@ object Dependencies {
         val test = "org.jetbrains.kotlin:kotlin-test:$version"
 
         object Coroutines {
-            val version = "1.4.2"
+            val version = "1.4.3"
             val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
             val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
             val rx = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$version"
@@ -68,6 +68,7 @@ object Dependencies {
         val datastorePreferences = "androidx.datastore:datastore-preferences:1.0.0-alpha05"
         val browser = "androidx.browser:browser:1.2.0"
         val webkit = "androidx.webkit:webkit:1.3.0-alpha02"
+        val activityKtx = "androidx.activity:activity-ktx:1.3.0-alpha03"
         val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.0-alpha06"
         val media = "androidx.media:media:1.2.0"
         val emoji = "androidx.emoji:emoji:1.2.0-alpha01"
@@ -76,7 +77,10 @@ object Dependencies {
         object Lifecycle {
             val version = "2.2.0"
             val extensions = "androidx.lifecycle:lifecycle-extensions:$version"
+            val service = "androidx.lifecycle:lifecycle-service:$version"
+            val process = "androidx.lifecycle:lifecycle-process:$version"
             val rx = "androidx.lifecycle:lifecycle-reactivestreams-ktx:$version"
+            val viewModelSavedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$version"
             val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             val livedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
         }
@@ -97,6 +101,11 @@ object Dependencies {
             val kapt = "androidx.room:room-compiler:$version"
             val kaptDependency =
                 DefaultExternalModuleDependency("androidx.room", "room-compiler", version)
+        }
+
+        object Work {
+            val version = "2.5.0"
+            val runtimeKtx = "androidx.work:work-runtime-ktx:$version"
         }
     }
 

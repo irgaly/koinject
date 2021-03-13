@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     id(Dependencies.Ksp.plugin)
     id(Dependencies.Kotlin.KotlinX.Serialization.plugin)
+    id(Dependencies.AndroidX.Navigation.plugin)
 }
 
 android {
@@ -19,8 +20,10 @@ android {
 dependencies {
     implementation(Dependencies.AndroidX.appCompat)
     implementation(Dependencies.AndroidX.material)
+    implementation(Dependencies.AndroidX.Navigation.fragmentKtx)
     implementation(Dependencies.Kotlin.KotlinX.Serialization.json)
     implementation(project(":koinject"))
+    implementation(project(":koinject-android"))
+    implementation(project(":koinject-android-work"))
     ksp(project(":koinject-ksp"))
-    testImplementation(project(":test:android"))
 }

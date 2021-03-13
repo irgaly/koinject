@@ -66,6 +66,10 @@ internal class ScopeRegistry(private val koinject: Koinject) {
         }
     }
 
+    fun getScope(key: ScopeKey): Scope? {
+        return scopes[key.scopeId]?.get(key)
+    }
+
     fun createScope(key: ScopeKey, parentScope: Scope? = null): Scope {
         lock.withLock {
             val parent = parentScope ?: rootScope

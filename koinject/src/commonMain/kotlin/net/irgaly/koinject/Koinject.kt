@@ -35,4 +35,8 @@ class Koinject {
     fun closeScope(scope: Scope) {
         scopeRegistry.removeScope(scope)
     }
+
+    fun getScope(scopeId: ScopeId, owner: Any? = null): Scope? {
+        return scopeRegistry.getScope(ScopeKey(scopeId, owner))
+    }
 }
