@@ -1,8 +1,5 @@
 package net.irgaly.test
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineScope
-import kotlinx.coroutines.test.runBlockingTest
 import org.spekframework.spek2.dsl.Skip
 import org.spekframework.spek2.dsl.TestBody
 import org.spekframework.spek2.style.specification.Suite
@@ -12,7 +9,6 @@ import kotlin.coroutines.EmptyCoroutineContext
 /**
  * Coroutine に対応した it
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 fun Suite.itBlocking(description: String, skip: Skip = Skip.No, timeout: Long = delegate.defaultTimeout, context: CoroutineContext = EmptyCoroutineContext, body: suspend TestBody.() -> Unit) {
     it(description, skip, timeout) {
         runBlockingTest(context) {
@@ -24,7 +20,6 @@ fun Suite.itBlocking(description: String, skip: Skip = Skip.No, timeout: Long = 
 /**
  * Coroutine に対応した xit
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 fun Suite.xitBlocking(description: String, reason: String = "", timeout: Long = delegate.defaultTimeout, context: CoroutineContext = EmptyCoroutineContext, body: suspend TestBody.() -> Unit) {
     xit(description, reason, timeout) {
         runBlockingTest(context) {
@@ -36,7 +31,6 @@ fun Suite.xitBlocking(description: String, reason: String = "", timeout: Long = 
 /**
  * Coroutine に対応した before
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 fun Suite.beforeBlocking(
     context: CoroutineContext = EmptyCoroutineContext,
     testBody: suspend TestCoroutineScope.() -> Unit
@@ -49,7 +43,6 @@ fun Suite.beforeBlocking(
 /**
  * Coroutine に対応した after
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 fun Suite.afterBlocking(
     context: CoroutineContext = EmptyCoroutineContext,
     testBody: suspend TestCoroutineScope.() -> Unit
@@ -62,7 +55,6 @@ fun Suite.afterBlocking(
 /**
  * Coroutine に対応した beforeEach
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 fun Suite.beforeEachBlocking(
     context: CoroutineContext = EmptyCoroutineContext,
     testBody: suspend TestCoroutineScope.() -> Unit
@@ -75,7 +67,6 @@ fun Suite.beforeEachBlocking(
 /**
  * Coroutine に対応した afterEach
  */
-@OptIn(ExperimentalCoroutinesApi::class)
 fun Suite.afterEachBlocking(
     context: CoroutineContext = EmptyCoroutineContext,
     testBody: suspend TestCoroutineScope.() -> Unit

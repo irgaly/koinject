@@ -4,8 +4,8 @@ plugins {
 
 buildscript {
     repositories {
-        mavenCentral()
         google()
+        mavenCentral()
     }
     dependencies {
         classpath(Dependencies.Android.classpath)
@@ -19,8 +19,8 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenCentral()
         google()
+        mavenCentral()
     }
     apply(plugin = Dependencies.Remal.checkUpdatesPlugin)
 }
