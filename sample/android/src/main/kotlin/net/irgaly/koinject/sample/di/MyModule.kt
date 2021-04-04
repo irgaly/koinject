@@ -6,5 +6,4 @@ import net.irgaly.koinject.sample.impl.MyInterfaceImpl
 
 class MyModule: Module({
     factory<MyInterface, MyInterfaceImpl>()
-    single<MyInterface, MyInterfaceImpl>()
 })
